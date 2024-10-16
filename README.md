@@ -1,0 +1,1 @@
+Курс по FastAPI: https://stepik.org/lesson/1044665/step/2?unit=1053239
