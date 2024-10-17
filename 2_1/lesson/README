@@ -1,0 +1,7 @@
+Команда для запуска программы: uvicorn 2_1.lesson.main:app --reload
+
+Проверка в браузере: http://localhost:8000
+
+Убить процесс, если он завис:
+1) tasklist | findstr python
+2) taskkill /F /PID <PID>
