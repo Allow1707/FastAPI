@@ -41,9 +41,9 @@ def create_jwt_token(data: dict, expires_delta: timedelta = None) -> str:
     """Функция создания JWT токена"""
     to_encode = data.copy()
     if expires_delta:
-        expire = datetime.now() + expires_delta
+        expire = datetime.utcnow() + expires_delta
     else:
-        expire = datetime.now() + timedelta(minutes=15)  # По умолчанию 15 минут
+        expire = datetime.utcnow() + timedelta(minutes=15)  # По умолчанию 15 минут
     to_encode.update({"exp": expire})
     encoded_jwt: str = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
@@ -75,7 +75,7 @@ def login_route(user: AuthData):
     user: User | None = get_user(username)
     if user and compare_digest(password, user.password):
         jwt_data: dict = {"sub": username}
-        jwt_token: str = create_jwt_token(jwt_data, timedelta(1))
+        jwt_token: str = create_jwt_token(jwt_data, timedelta(minutes=1))
         return {
             "access_token": jwt_token,
             "token_type": "bearer"
