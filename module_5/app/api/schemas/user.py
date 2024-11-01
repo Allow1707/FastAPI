@@ -1,17 +1,17 @@
 import datetime
-from typing import Optional
 from uuid import UUID
 from pydantic import BaseModel, ConfigDict
 
 
-class ToDoCreate(BaseModel):
+class UserCreate(BaseModel):
     name: str
-    role: Optional[]
+    role: str = 'guest'
 
 
-class ToDoFromDB(ToDoCreate):
+class UserFromDB(UserCreate):
     model_config = ConfigDict(from_attributes=True)
 
     id: int
     uuid: UUID
     created_at: datetime.datetime
+    updated_at: datetime.datetime
